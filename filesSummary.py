@@ -14,7 +14,9 @@ def read_conteo(archivo, path=path):
     new_row = {}
     try:
         # Lee el archivo CSV en un DataFrame de Pandas
-        df = pd.read_csv(path, usecols=column_name)
+        df = pd.read_csv(path)
+        num_columns=len(df.columns)
+        df = df[column_name]
         rows = len(df[column_name[0]])
         ones = (df[column_name[0]] == 1).sum()
         zeros = (df[column_name[0]] == 0).sum()
@@ -25,6 +27,7 @@ def read_conteo(archivo, path=path):
         new_row['zeros'] = zeros
         new_row['Intial_time'] = df['time'][0]
         new_row['Final_time'] = df['time'][rows-1]
+        new_row['columns'] = num_columns
         return new_row
     except Exception as e:
         print(f"Error al procesar el archivo {archivo}: {str(e)}")
@@ -54,8 +57,8 @@ info['ones'] = info['ones'].astype(float)
 info['rows'] = info['rows'].astype(float)
 info['weightOnes'] = info['ones']/info['rows']
 
-print("Archivos con al menos un 1 en la columna 'Stable cruise':" + str(len(info[info['ones'] > 0])))
-print("Archivos con todos 0 en la columna 'Stable cruise':" + str(len(info[info['ones'] == 0])))
+print("Archivos con al menos un 1 en la columna 'Stable':" + str(len(info[info['ones'] > 0])))
+print("Archivos con todos 0 en la columna 'Stable':" + str(len(info[info['ones'] == 0])))
 print("Porcentaje de archivos con al menos un 1: "+ str(100*len(info[info['ones'] > 0])/len(info))+ "%")
 print("Peso promedio de los 1: " + str(info['ones'].sum()/info['rows'].sum()))
 
