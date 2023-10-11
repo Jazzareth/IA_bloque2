@@ -15,7 +15,7 @@ def read_conteo(archivo, path=path):
     try:
         # Lee el archivo CSV en un DataFrame de Pandas
         df = pd.read_csv(path)
-        num_columns=len(df.columns)
+        num_columns=len(list(df.columns))
         df = df[column_name]
         rows = len(df[column_name[0]])
         ones = (df[column_name[0]] == 1).sum()
