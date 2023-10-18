@@ -14,7 +14,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # Carga los datos desde un archivo CSV
-data = pd.read_csv('datos.csv')
+data = pd.read_csv('dummies_data.csv')
 
 # Separar las características (X) y las etiquetas (y)
 X = data.drop('etiqueta', axis=1)  # etiqueta se modifica a las columnas que tenemos
